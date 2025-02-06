@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Slider } from '../ui/slider'
 import { Button } from '../ui/button'
 import {
@@ -23,6 +23,7 @@ import {
 
 import classes from './Player.module.css'
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter'
+import fetchRandomNumber from '@/utils/fetchRandomNumber'
 
 const speedDisplayMap: { [key: number]: string } = {
   10: 'Fast',
@@ -45,6 +46,7 @@ type PlayerProps = {
   playerState: PlayerState
 }
 
+const [MIN_SIZE, MAX_SIZE] = [10, 75]
 const Player: React.FC<PlayerProps> = ({
   speed,
   setSpeed,
@@ -61,6 +63,17 @@ const Player: React.FC<PlayerProps> = ({
   const [isRotating, setIsRotating] = useState(false)
   const intervalRef = useRef<number | null | NodeJS.Timeout>(null)
 
+  useEffect(() => {
+    fetchRandomNumber(MIN_SIZE, MAX_SIZE)
+      .catch(() => {
+        setArrayLength(
+          Math.floor(Math.random() * (MAX_SIZE - MIN_SIZE) + MIN_SIZE),
+        )
+      })
+      .then((num) => {
+        setArrayLength(num ?? 20)
+      })
+  }, [])
   const handleArrayLengthChange = (newLength: number) => {
     setArrayLength(newLength)
     resetAlgorithm(newLength)
@@ -212,8 +225,8 @@ const Player: React.FC<PlayerProps> = ({
           <Slider
             value={[arrayLength]}
             onValueChange={(value) => handleArrayLengthChange(value[0])}
-            max={75}
-            min={10}
+            max={MAX_SIZE}
+            min={MIN_SIZE}
             step={1}
             className="flex-1"
           />
