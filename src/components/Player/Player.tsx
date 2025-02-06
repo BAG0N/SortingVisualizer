@@ -63,21 +63,23 @@ const Player: React.FC<PlayerProps> = ({
   const [isRotating, setIsRotating] = useState(false)
   const intervalRef = useRef<number | null | NodeJS.Timeout>(null)
 
-  useEffect(() => {
-    fetchRandomNumber(MIN_SIZE, MAX_SIZE)
-      .catch(() => {
-        setArrayLength(
-          Math.floor(Math.random() * (MAX_SIZE - MIN_SIZE) + MIN_SIZE),
-        )
-      })
-      .then((num) => {
-        setArrayLength(num ?? 20)
-      })
-  }, [])
   const handleArrayLengthChange = (newLength: number) => {
     setArrayLength(newLength)
     resetAlgorithm(newLength)
   }
+
+  useEffect(() => {
+    let [minSize, maxSize] = [17, 23] // to avoid drastic changes
+    fetchRandomNumber(minSize, maxSize)
+      .catch(() => {
+        handleArrayLengthChange(
+          Math.floor(Math.random() * (maxSize - minSize) + minSize),
+        )
+      })
+      .then((num) => {
+        handleArrayLengthChange(num ?? 20)
+      })
+  }, [])
 
   const handleResetAlgorithm = useCallback(() => {
     resetAlgorithm(arrayLength)
