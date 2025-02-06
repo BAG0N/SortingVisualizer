@@ -10,7 +10,7 @@ async function fetchRandomNumber(min: number, max: number): Promise<number> {
     'https://api.random.org/json-rpc/4/invoke',
     {
       jsonrpc: '2.0',
-      method: 'generateIntegerssss',
+      method: 'generateIntegers',
       params: {
         n: 1,
         replacement: true,
