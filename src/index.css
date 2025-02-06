@@ -1,0 +1,115 @@
+@import 'tailwindcss';
+
+:root {
+  --primary-color: hsl(230, 23%, 20%);
+  --text-color: hsl(0, 8%, 97%);
+  --secondary-text-color: hsl(214, 33%, 65%);
+  --icon-width-large: 3rem;
+  --icon-width-medium: 2.5rem;
+  --icon-width-small: 1.5rem;
+}
+
+/* light mode */
+:root[data-theme='light'] {
+  --background-color: hsl(210, 36%, 96%);
+  --active-color: hsl(228, 31%, 34%);
+  --bar-color: hsla(230, 10%, 46%, 0.1);
+  --color-button: hsl(230, 23%, 20%);
+  --highlight-compare-color: hsla(26, 87%, 67%, 0.8);
+  --highlight-active-color: hsla(10, 58%, 45%, 0.8);
+  --highlight-pivot-color: hsla(247, 54%, 67%, 0.8);
+}
+
+/* dark mode */
+:root[data-theme='dark'] {
+  --background-color: hsl(0, 0%, 17%);
+  --active-color: hsl(106, 30%, 43%);
+  --bar-color: hsla(232, 19%, 39%, 0.3);
+  --color-button: hsl(0, 8%, 97%);
+  --highlight-compare-color: hsl(26, 87%, 67%);
+  --highlight-active-color: hsl(10, 58%, 45%);
+  --highlight-pivot-color: hsl(247, 54%, 67%);
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  overflow: auto;
+}
+
+nav li {
+  padding-block: 15px;
+}
+.play-icon,
+.pause-icon,
+.reset-player-icon {
+  width: var(--icon-width-large);
+  height: var(--icon-width-large);
+}
+.reset-icon,
+.speed-icon,
+.light-theme-icon,
+.dark-theme-icon,
+.git-icon,
+.help-icon {
+  width: var(--icon-width-medium);
+  height: var(--icon-width-medium);
+}
+
+.prev-step-icon,
+.next-step-icon {
+  width: var(--icon-width-small);
+  height: var(--icon-width-small);
+}
+
+.play-icon:hover,
+.pause-icon:hover {
+  transform: scale(1.1);
+}
+
+@keyframes rotateAndScale {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.9);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.reset-icon.rotating {
+  animation: rotateAndScale 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .next-step-icon,
+  .prev-step-icon {
+    width: var(--icon-width-small);
+    height: var(--icon-width-small);
+  }
+  .reset-icon,
+  .speed-icon,
+  .light-theme-icon,
+  .dark-theme-icon,
+  .git-icon,
+  .help-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}

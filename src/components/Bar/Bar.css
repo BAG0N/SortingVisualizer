@@ -1,0 +1,24 @@
+.bar {
+  transition: background-color 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  margin: 1px;
+  /* border: 1px solid #0f02; */
+  border-radius: 3px;
+  background-color: var(--bar-color);
+}
+.bar.active {
+  background-color: var(--highlight-active-color);
+}
+
+.bar.compare {
+  background-color: var(--highlight-compare-color);
+}
+.bar.pivot {
+  background-color: var(--highlight-pivot-color);
+}
+.bar.sorted {
+  background-color: var(--active-color);
+  transition: background-color 0.2s cubic-bezier(0, 0, 0.58, 1);
+}
+.bar.notStarted {
+  transition: height 0.5s ease-in-out;
+}
